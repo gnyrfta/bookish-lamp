@@ -18,7 +18,19 @@ app.use(express.static('public'));
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
-
+app.get('/api/whoami/',function (req, res) {
+    let address = req.ip;
+    let clientLanguage = req.get('accept-language');
+    let clientSoftware = req.get('user-agent');
+    console.log(address);
+    console.log(clientLanguage);
+    console.log(clientSoftware);
+    res.json({
+	ipaddress:address,
+	language:clientLanguage,
+	software:clientSoftware
+    });
+});
 // your first API endpoint...
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
